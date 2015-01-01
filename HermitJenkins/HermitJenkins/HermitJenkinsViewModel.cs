@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hermit.Plugin;
 using Caliburn.Micro;
+using Newtonsoft.Json;
 
 namespace HermitJenkins
 {
@@ -23,6 +24,7 @@ namespace HermitJenkins
         }
 
         private JenkinsNode _Node;
+
         public JenkinsNode Node
         {
             get { return _Node; }
@@ -37,6 +39,7 @@ namespace HermitJenkins
         }
     }
 
+    [JsonObject(ItemRequired=Required.AllowNull)]
     public class JenkinsNode : PropertyChangedBase
     {
         private string _Description;
@@ -53,6 +56,7 @@ namespace HermitJenkins
             }
         }
 
+        [JsonProperty("jobs")]
         private List<JenkinsProject> _Projects;
         public List<JenkinsProject> Projects
         {
@@ -70,6 +74,7 @@ namespace HermitJenkins
 
     public class JenkinsProject : PropertyChangedBase
     {
+        [JsonProperty("name")]
         private string _Name;
         public string Name
         {
